@@ -244,8 +244,6 @@ def run_auto():
     print("="*50)
     print("  EB Fund Bot |", now.strftime("%Y-%m-%d %H:%M"))
     print("="*50)
-        print("  非交易日")
-        return
     if 8.3 <= hr <= 8.9:
         report_pre_market()
     elif 15.2 <= hr <= 15.5:
