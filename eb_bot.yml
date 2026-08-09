@@ -1,0 +1,35 @@
+﻿# 苯乙烯基本面研究员 — 每日定时推送
+# GitHub Actions 定时运行 (UTC时间 = 北京时间-8)
+
+name: EB Fundamental Bot
+
+on:
+  schedule:
+    # 08:40 北京时间 = 00:40 UTC — 盘前速报
+    - cron: '40 0 * * 1-5'
+    # 15:15 北京时间 = 07:15 UTC — 收盘日报
+    - cron: '15 7 * * 1-5'
+    # 23:05 北京时间 = 15:05 UTC — 夜盘小结
+    - cron: '5 15 * * 1-5'
+    # 周五16:00 北京时间 = 周五08:00 UTC — 周度复盘
+    - cron: '0 8 * * 5'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run EB Bot
+        env:
+          DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
+        run: python eb_fundamental_bot.py auto
