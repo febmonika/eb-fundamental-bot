@@ -244,7 +244,6 @@ def run_auto():
     print("="*50)
     print("  EB Fund Bot |", now.strftime("%Y-%m-%d %H:%M"))
     print("="*50)
-    if not is_td() and wd != 5 and '--force' not in sys.argv:
         print("  非交易日")
         return
     if 8.3 <= hr <= 8.9:
@@ -256,7 +255,7 @@ def run_auto():
     elif 15.8 <= hr <= 16.2 and wd == 4:
         report_weekly()
     else:
-        check_alerts()
+        report_daily_close()
     print("="*50)
 
 if __name__ == "__main__":
