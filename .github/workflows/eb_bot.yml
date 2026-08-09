@@ -1,0 +1,23 @@
+name: EB Fundamental Bot
+
+on:
+  schedule:
+    - cron: '40 0 * * 1-5'
+    - cron: '15 7 * * 1-5'
+    - cron: '5 15 * * 1-5'
+    - cron: '0 8 * * 5'
+  workflow_dispatch:
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run EB Bot
+        run: python eb_fundamental_bot.py auto
