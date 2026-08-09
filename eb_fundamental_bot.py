@@ -253,7 +253,9 @@ def run_auto():
     elif 15.8 <= hr <= 16.2 and wd == 4:
         report_weekly()
     else:
-        report_daily_close()
+
+        check_alerts()
+
     print("="*50)
 
 if __name__ == "__main__":
